@@ -10,4 +10,16 @@ public class Creation
     public Guid CreatorId{ get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
+
+    public Creation(Guid id, string title, string description, string imageUrl, string elementUsed, Guid creatorId, DateTime createdAt, DateTime? updatedAt)
+    {
+        Id = id;
+        Title = title;
+        Description = description;
+        ImageUrl = imageUrl;
+        ElementUsed = elementUsed;
+        CreatorId = creatorId;
+        CreatedAt = createdAt;
+        UpdatedAt = updatedAt;
+    }
 }

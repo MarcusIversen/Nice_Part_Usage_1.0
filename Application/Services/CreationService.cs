@@ -85,9 +85,6 @@ public class CreationService : ICreationService
 
     public async Task<Creation> UpdateCreation(Creation newCreation, Creation oldCreation)
     {
-        if (string.IsNullOrEmpty(newCreation.Id))
-            throw new ArgumentException("Id  cannot be null or empty");
-
         ValidationResult validationResult = _creationValidator.Validate(newCreation);
         
         if (validationResult.IsValid)

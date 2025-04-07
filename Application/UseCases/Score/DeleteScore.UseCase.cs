@@ -16,4 +16,3 @@ public class DeleteScoreUseCase
         return await _scoreService.DeleteScore(scoreId);
     }
 }
-}
