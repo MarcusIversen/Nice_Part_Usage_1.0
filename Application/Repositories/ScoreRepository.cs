@@ -1,6 +1,22 @@
-namespace Infrastructure.Repositories;
+using Core.Entities;
+using Core.Interfaces.Repositories;
 
-public class ScoreRepository
+namespace Application.Repositories;
+
+public class ScoreRepository : IScoreRepository
 {
-    
+    public Task<Score> CreateScore(Score score)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IEnumerable<Score>> GetAllScores()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Score> DeleteScore(Score score)
+    {
+        throw new NotImplementedException();
+    }
 }

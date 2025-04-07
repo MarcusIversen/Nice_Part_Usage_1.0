@@ -1,6 +1,8 @@
-using Application.Services.Interfaces;
-using Infrastructure.Repositories;
-using Infrastructure.Repositories.Interfaces;
+using Application.Repositories;
+using Application.Services;
+using Core.Interfaces.Repositories;
+using Core.Interfaces.Services;
+
 
 namespace NicePartUsage_API.Configs;
 
@@ -13,14 +15,12 @@ public static class DependencyInjectionConfig
         services.AddScoped<ICreationRepository, CreationRepository>();
         services.AddScoped<IScoreRepository, ScoreRepository>();
         
-        
         // Services
-        services.AddScoped<IUserService, Application.Services.UserService>();
-        services.AddScoped<ICreationService, Application.Services.CreationService>();
-        services.AddScoped<IScoreService, Application.Services.ScoreService>();
+        //services.AddScoped<IUserService, UserService>();
+        //services.AddScoped<ICreationService, CreationService>();
+        //services.AddScoped<IScoreService, ScoreService>();
 
         // Automapper
-
         services.AddSingleton(AutoMapperConfig.ConfigureAutoMapper());
     }
 }
