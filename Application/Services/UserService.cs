@@ -53,12 +53,7 @@ public class UserService : IUserService
             throw new ArgumentException(e.Message);
         }
     }
-
-    public Task<User> GetUserByUserName(string userName)
-    {
-        // TODO consider if this method is needed
-        throw new NotImplementedException();
-    }
+    
 
     public async Task<User> DeleteUserById(string userId)
     {

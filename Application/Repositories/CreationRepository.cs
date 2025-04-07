@@ -25,7 +25,7 @@ public class CreationRepository: ICreationRepository
         throw new NotImplementedException();
     }
 
-    public Task<Creation> UpdateCreation(Creation creation)
+    public Task<Creation> UpdateCreation(Creation newCreation, Creation oldCreation)
     {
         throw new NotImplementedException();
     }
