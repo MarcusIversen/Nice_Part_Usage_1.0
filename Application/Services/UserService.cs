@@ -18,14 +18,14 @@ public class UserService : IUserService
         _userRepository = userRepository;
     }
 
-    public Task<User> CreateUser(User user)
+    public async Task<User> CreateUser(User user)
     {
         ValidationResult validationResult = _userValidator.Validate(user);
         if (validationResult.IsValid)
         {
             try
             {
-                var createdUser = _userRepository.CreateUser(user);
+                var createdUser = await _userRepository.CreateUser(user);
                 return createdUser;
             }
             catch (Exception e)
@@ -38,18 +38,41 @@ public class UserService : IUserService
         throw new ArgumentException($"Invalid user {errorMessage}");
     }
 
-    public Task<User> GetUserById(string userId)
+    public async Task<User> GetUserById(string userId)
     {
-        throw new NotImplementedException();
+        if (string.IsNullOrEmpty(userId))
+            throw new ArgumentException("id cannot be null or empty");
+
+        try
+        {
+            var user = await _userRepository.GetUserById(userId);
+            return user;
+        }
+        catch (Exception e)
+        {
+            throw new ArgumentException(e.Message);
+        }
     }
 
     public Task<User> GetUserByUserName(string userName)
     {
+        // TODO consider if this method is needed
         throw new NotImplementedException();
     }
 
-    public Task<User> DeleteUserById(string userId)
+    public async Task<User> DeleteUserById(string userId)
     {
-        throw new NotImplementedException();
+        if (string.IsNullOrEmpty(userId))
+            throw new ArgumentException("id cannot be null or empty");
+        
+        try
+        {
+            var user = await _userRepository.DeleteUserById(userId);
+            return user;
+        }
+        catch (Exception e)
+        {
+            throw new ArgumentException(e.Message);
+        }
     }
 }

@@ -8,7 +8,6 @@ namespace Application.Services;
 
 public class ScoreService : IScoreService
 {
-    
     private readonly ScoreValidator _scoreValidator;
     private readonly IScoreRepository _scoreRepository;
 
@@ -40,11 +39,30 @@ public class ScoreService : IScoreService
 
     public Task<IEnumerable<Score>> GetAllScores()
     {
-        throw new NotImplementedException();
+        try
+        {
+            var scores = _scoreRepository.GetAllScores();
+            return scores;
+        }
+        catch (Exception e)
+        {
+            throw new ArgumentException(e.Message);
+        }
     }
 
-    public Task<Score> DeleteScore(Score score)
+    public async Task<Score> DeleteScore(string scoreId)
     {
-        throw new NotImplementedException();
+        if (string.IsNullOrEmpty(scoreId))
+            throw new ArgumentException("id cannot be null or empty");
+        
+        try
+        {
+            var score = await _scoreRepository.DeleteScore(scoreId);
+            return score;
+        }
+        catch (Exception e)
+        {
+            throw new ArgumentException(e.Message);
+        }
     }
 }

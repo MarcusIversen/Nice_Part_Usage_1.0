@@ -10,7 +10,7 @@ public interface ICreationRepository
     public Task<Creation> GetCreationById(string creationId);
     public Task<IEnumerable<Creation>> SearchByElementName(string elementName);
 
-    public Task<Creation> UpdateCreation(Creation creation);
+    public Task<Creation> UpdateCreation(Creation newCreation, Creation oldCreation);
 
     public Task<Creation> DeleteCreation(string creationId);
 }

@@ -7,5 +7,5 @@ public interface IScoreService
     public Task<Score> CreateScore(Score score);
     public Task<IEnumerable<Score>> GetAllScores();
     
-    public Task<Score> DeleteScore(Score score);
+    public Task<Score> DeleteScore(string scoreId);
 }
