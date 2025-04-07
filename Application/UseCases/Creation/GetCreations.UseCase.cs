@@ -11,7 +11,7 @@ public class GetCreationsUseCase
         _creationService = creationService;
     }
 
-    public async Task<IEnumerable<Core.Entities.Creation>> ExecuteAsync(string creationId)
+    public async Task<IEnumerable<Core.Entities.Creation>> ExecuteAsync()
     {
         return await _creationService.GetAllCreations();
     }

@@ -16,9 +16,9 @@ public static class DependencyInjectionConfig
         services.AddScoped<IScoreRepository, ScoreRepository>();
         
         // Services
-        //services.AddScoped<IUserService, UserService>();
-        //services.AddScoped<ICreationService, CreationService>();
-        //services.AddScoped<IScoreService, ScoreService>();
+        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<ICreationService, CreationService>();
+        services.AddScoped<IScoreService, ScoreService>();
 
         // Automapper
         services.AddSingleton(AutoMapperConfig.ConfigureAutoMapper());

@@ -1,4 +1,8 @@
 using AutoMapper;
+using Core.Entities;
+using NicePartUsage_API.Controllers.DTOs.Creation;
+using NicePartUsage_API.Controllers.DTOs.Score;
+using NicePartUsage_API.Controllers.DTOs.User;
 
 namespace NicePartUsage_API.Configs;
 
@@ -9,7 +13,16 @@ public class AutoMapperConfig
         var mapperConfig = new MapperConfiguration(config =>
         {
             // DTO to Core Entity
-            // config.CreateMap<AddCreationDto, Creation>();
+            // Creation
+            config.CreateMap<AddCreationDto, Creation>();
+            config.CreateMap<UpdateCreationDto, Creation>();
+            
+            // User
+            config.CreateMap<AddUserDto, User>();
+            config.CreateMap<AddUserDto, User>();
+            
+            // Score
+            config.CreateMap<AddScoreDto, Score>();
         });
 
         return mapperConfig.CreateMapper();

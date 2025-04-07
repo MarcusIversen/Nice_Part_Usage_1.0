@@ -12,7 +12,7 @@ public class CreationValidator : AbstractValidator<Creation>
         RuleFor(score => score.Description).NotEmpty();
         RuleFor(score => score.ImageUrl).NotEmpty();
         RuleFor(score => score.ElementUsed).NotEmpty();
-        RuleFor(score => score.Creator).NotEmpty();
+        RuleFor(score => score.CreatorId).NotEmpty();
         RuleFor(score => score.ElementUsed).NotEmpty();
         RuleFor(score => score.CreatedAt)
             .NotEmpty()
