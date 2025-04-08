@@ -38,10 +38,19 @@ public class CreationRepository: ICreationRepository
 
     }
 
-    //TODO How do we search and should we index by element name? For fast lookups?
-    public Task<IEnumerable<Creation>> SearchByElementName(string elementName)
+    public async Task<IEnumerable<Creation>> SearchByElementName(string elementName)
     {
-        throw new NotImplementedException();
+        if (string.IsNullOrWhiteSpace(elementName))
+        {
+            throw new ArgumentException("Element name cannot be null or empty.", nameof(elementName));
+        }
+
+        var results = await _context.Creations
+            .Where(creation => creation.ElementUsed.Contains(elementName))
+            .ToListAsync();
+
+        return results;
+        
     }
 
     public async Task<Creation> UpdateCreation(Creation newCreation, Creation oldCreation)

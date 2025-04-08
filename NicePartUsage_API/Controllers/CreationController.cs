@@ -1,6 +1,7 @@
 using Application.UseCases.Creation;
 using AutoMapper;
 using Core.Entities;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using NicePartUsage_API.Controllers.DTOs.Creation;
@@ -8,7 +9,7 @@ using NicePartUsage_API.Controllers.DTOs.Creation;
 namespace NicePartUsage_API.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Microsoft.AspNetCore.Mvc.Route("[controller]")]
 public class CreationController : ControllerBase
 {
     private readonly IMapper _mapper;
@@ -68,7 +69,7 @@ public class CreationController : ControllerBase
     }
 
     [HttpGet]
-    [Route("{id}")]
+    [Microsoft.AspNetCore.Mvc.Route("{id}")]
     public async Task<IActionResult> GetCreationById([FromRoute] string creationId)
     {
         try
@@ -96,8 +97,7 @@ public class CreationController : ControllerBase
         }
     }
 
-    [HttpGet]
-    [Route("{elementName}")]
+    [HttpGet("byElementName/{elementName}")]
     public async Task<IActionResult> GetCreationsByElementName([FromRoute] string elementName)
     {
         try
@@ -113,7 +113,7 @@ public class CreationController : ControllerBase
 
 
     [HttpDelete]
-    [Route("{id}")]
+    [Microsoft.AspNetCore.Mvc.Route("{id}")]
     public async Task<IActionResult> DeleteCreationById([FromRoute] string id)
     {
         try
