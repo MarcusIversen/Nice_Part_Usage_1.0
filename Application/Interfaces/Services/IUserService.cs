@@ -1,11 +1,11 @@
 using Core.Entities;
 
-namespace Core.Interfaces.Repositories;
+namespace Application.Interfaces.Services;
 
-public interface IUserRepository
+public interface IUserService
 {
     public Task<User> CreateUser(User user);
     public Task<User> GetUserById(string userId);
-    public Task<User> DeleteUserById(string userId);
     
+    public Task<User> DeleteUserById(string userId);
 }

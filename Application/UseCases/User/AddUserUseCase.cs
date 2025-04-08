@@ -1,4 +1,4 @@
-using Core.Interfaces.Services;
+using Application.Interfaces.Services;
 
 namespace Application.UseCases.User;
 

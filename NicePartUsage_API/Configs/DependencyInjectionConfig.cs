@@ -1,9 +1,9 @@
+using Application.Interfaces.Repositories;
+using Application.Interfaces.Services;
 using Application.Services;
 using Application.UseCases.Creation;
 using Application.UseCases.Score;
 using Application.UseCases.User;
-using Core.Interfaces.Repositories;
-using Core.Interfaces.Services;
 using Core.Validation;
 using Infrastructure.MongoDB;
 using Infrastructure.Repositories;

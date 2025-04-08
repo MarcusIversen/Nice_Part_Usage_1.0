@@ -1,8 +1,8 @@
 using Core.Entities;
 
-namespace Core.Interfaces.Repositories;
+namespace Application.Interfaces.Services;
 
-public interface IScoreRepository
+public interface IScoreService
 {
     public Task<Score> CreateScore(Score score);
     public Task<IEnumerable<Score>> GetAllScores();

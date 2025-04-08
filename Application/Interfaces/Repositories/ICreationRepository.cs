@@ -1,6 +1,6 @@
 using Core.Entities;
 
-namespace Core.Interfaces.Repositories;
+namespace Application.Interfaces.Repositories;
 
 public interface ICreationRepository
 {
