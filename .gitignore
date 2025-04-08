@@ -56,3 +56,6 @@ nunit-*.xml
 # Idea
 .idea/
 .idea
+
+# Dotsettings
+NPU_Platform.sln.DotSettings.use
