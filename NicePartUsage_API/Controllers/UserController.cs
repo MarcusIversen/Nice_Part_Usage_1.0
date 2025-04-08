@@ -45,11 +45,11 @@ public class UserController : ControllerBase
 
     [HttpGet]
     [Route("{id}")]
-    public async Task<IActionResult> GetUserById([FromRoute] string userId)
+    public async Task<IActionResult> GetUserById([FromRoute] string id)
     {
         try
         {
-            var user = await _getUserByIdUseCase.ExecuteAsync(userId);
+            var user = await _getUserByIdUseCase.ExecuteAsync(id);
             return Ok(user);
         }
         catch (Exception e)
@@ -60,11 +60,11 @@ public class UserController : ControllerBase
     
     [HttpDelete]
     [Route("{id}")]
-    public async Task<IActionResult> DeleteUserById([FromRoute] string userId)
+    public async Task<IActionResult> DeleteUserById([FromRoute] string id)
     {
         try
         {
-            var user = await _deleteUserUseCase.ExecuteAsync(userId);
+            var user = await _deleteUserUseCase.ExecuteAsync(id);
             return Ok(user);
         }
         catch (Exception e)

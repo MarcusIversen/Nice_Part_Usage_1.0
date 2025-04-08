@@ -2,6 +2,7 @@ using Application.UseCases.Creation;
 using AutoMapper;
 using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using NicePartUsage_API.Controllers.DTOs.Creation;
 
 namespace NicePartUsage_API.Controllers;
@@ -12,7 +13,8 @@ public class CreationController : ControllerBase
 {
     private readonly IMapper _mapper;
 
-    private readonly AddOrUpdateCreationUseCase _addOrUpdateCreationUseCase;
+    private readonly AddCreationUseCase _addCreationUseCase;
+    private readonly UpdateCreationUseCase _updateCreationUseCase;
     private readonly GetCreationsUseCase _getCreationsUseCase;
     private readonly GetCreationByIdUseCase _getCreationByIdUseCase;
     private readonly GetCreationsByElementNameUseCase _getCreationsByElementNameUseCase;
@@ -20,14 +22,16 @@ public class CreationController : ControllerBase
 
     public CreationController(
         IMapper mapper,
-        AddOrUpdateCreationUseCase addOrUpdateCreationUseCase,
+        AddCreationUseCase addCreationUseCase,
+        UpdateCreationUseCase updateCreationUseCase,
         GetCreationsUseCase getCreationsUseCase,
         GetCreationByIdUseCase getCreationByIdUseCase,
         GetCreationsByElementNameUseCase getCreationsByElementNameUseCase,
         DeleteCreationUseCase deleteCreationUseCase)
     {
         _mapper = mapper;
-        _addOrUpdateCreationUseCase = addOrUpdateCreationUseCase;
+        _addCreationUseCase = addCreationUseCase;
+        _updateCreationUseCase = updateCreationUseCase;
         _getCreationsUseCase = getCreationsUseCase;
         _getCreationByIdUseCase = getCreationByIdUseCase;
         _getCreationsByElementNameUseCase = getCreationsByElementNameUseCase;
@@ -39,9 +43,8 @@ public class CreationController : ControllerBase
     {
         try
         {
-            Console.WriteLine("hey");
             var mappedCreation = _mapper.Map<Creation>(dto);
-            var createdCreation = await _addOrUpdateCreationUseCase.ExecuteAsync(mappedCreation);
+            var createdCreation = await _addCreationUseCase.ExecuteAsync(mappedCreation);
             return StatusCode(201, createdCreation);
         }
         catch (Exception e)
@@ -85,8 +88,7 @@ public class CreationController : ControllerBase
         try
         {
             var mappedCreation = _mapper.Map<Creation>(dto);
-            mappedCreation.CreatedAt = DateTime.UtcNow;
-            return Ok(await _addOrUpdateCreationUseCase.ExecuteAsync(mappedCreation));
+            return Ok(await _updateCreationUseCase.ExecuteAsync(mappedCreation));
         }
         catch (Exception e)
         {

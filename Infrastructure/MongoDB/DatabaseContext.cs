@@ -16,7 +16,6 @@ public class DatabaseContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        Console.WriteLine("database settings: " + _databaseSettings.ConnectionString + " " + _databaseSettings.DatabaseName);
         optionsBuilder.UseMongoDB(_databaseSettings.ConnectionString, _databaseSettings.DatabaseName);
     }
 

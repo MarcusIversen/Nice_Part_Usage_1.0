@@ -36,18 +36,20 @@ public static class DependencyInjectionConfig
         services.AddScoped<ScoreValidator>();
 
         // Use cases
+        services.AddScoped<AddCreationUseCase>();
+        services.AddScoped<DeleteCreationUseCase>();
+        services.AddScoped<GetCreationByIdUseCase>();
+        services.AddScoped<GetCreationsByElementNameUseCase>();
+        services.AddScoped<GetCreationsUseCase>();
+        services.AddScoped<UpdateCreationUseCase>();
+        
+        services.AddScoped<AddScoreUseCase>();
+        services.AddScoped<DeleteScoreUseCase>();
+        services.AddScoped<GetScoresUseCase>();
+        
         services.AddScoped<AddUserUseCase>();
         services.AddScoped<DeleteUserUseCase>();
         services.AddScoped<GetUserByIdUseCase>();
         
-        services.AddScoped<AddScoreUseCase>();
-        services.AddScoped<DeleteUserUseCase>();
-        services.AddScoped<GetScoresUseCase>();
-        
-        services.AddScoped<AddOrUpdateCreationUseCase>();
-        services.AddScoped<DeleteCreationUseCase>();
-        services.AddScoped<GetCreationByIdUseCase>();
-        services.AddScoped<GetCreationsUseCase>();
-        services.AddScoped<GetCreationsByElementNameUseCase>();
     }
 }
