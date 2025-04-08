@@ -114,11 +114,11 @@ public class CreationController : ControllerBase
 
     [HttpDelete]
     [Route("{id}")]
-    public async Task<IActionResult> DeleteCreationById([FromRoute] string creationId)
+    public async Task<IActionResult> DeleteCreationById([FromRoute] string id)
     {
         try
         {
-            var creation = await _deleteCreationUseCase.ExecuteAsync(creationId);
+            var creation = await _deleteCreationUseCase.ExecuteAsync(id);
             return Ok(creation);
         }
         catch (Exception e)

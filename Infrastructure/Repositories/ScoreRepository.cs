@@ -1,27 +1,41 @@
 using Core.Entities;
 using Core.Interfaces.Repositories;
+using Infrastructure.MongoDB;
+using Microsoft.EntityFrameworkCore;
+using MongoDB.Bson;
 
 namespace Infrastructure.Repositories;
 
 public class ScoreRepository : IScoreRepository
 {
-    public Task<Score> CreateScore(Score score)
+    private readonly DatabaseContext _context;
+
+    public ScoreRepository(DatabaseContext context)
     {
-        throw new NotImplementedException();
+        _context = context;
     }
 
-    public Task<IEnumerable<Score>> GetAllScores()
+    public async Task<Score> CreateScore(Score score)
     {
-        throw new NotImplementedException();
+        await _context.Scores.AddAsync(score);
+        await _context.SaveChangesAsync();
+        return score;
     }
 
-    public Task<Score> DeleteScore(string scoreId)
+    public async Task<IEnumerable<Score>> GetAllScores()
     {
-        throw new NotImplementedException();
+        var allScores = await _context.Scores.ToListAsync();
+        return allScores;
     }
 
-    public Task<Score> DeleteScore(Score score)
+    public async Task<Score> DeleteScore(string scoreId)
     {
-        throw new NotImplementedException();
+        var objectId = new ObjectId(scoreId);
+        var scoreToDelete = await _context.Scores.FirstOrDefaultAsync(score => score.Id == objectId);
+        if (scoreToDelete == null)
+            throw new KeyNotFoundException($"No score with id: {scoreId}");
+        _context.Scores.Remove(scoreToDelete);
+        await _context.SaveChangesAsync();
+        return scoreToDelete;
     }
 }
