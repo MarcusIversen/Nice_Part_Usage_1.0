@@ -1,18 +1,30 @@
 using Core.Entities;
 using Core.Interfaces.Repositories;
+using Infrastructure.MongoDB;
+using Microsoft.EntityFrameworkCore;
 
-namespace Application.Repositories;
+namespace Infrastructure.Repositories;
 
 public class CreationRepository: ICreationRepository
 {
-    public Task<Creation> CreateCreation(Creation creation)
+    private readonly DatabaseContext _context;
+
+    public CreationRepository(DatabaseContext context)
     {
-        throw new NotImplementedException();
+        _context = context;
     }
 
-    public Task<IEnumerable<Creation>> GetAllCreations()
+    public async Task<Creation> CreateCreation(Creation creation)
     {
-        throw new NotImplementedException();
+        await _context.Creations.AddAsync(creation);
+        await _context.SaveChangesAsync();
+        return creation;
+    }
+
+    public async Task<IEnumerable<Creation>> GetAllCreations()
+    {
+        var allCreations = await _context.Creations.ToListAsync();
+        return allCreations;
     }
 
     public Task<Creation> GetCreationById(string creationId)

@@ -7,16 +7,17 @@ namespace Infrastructure.MongoDB;
 
 public class DatabaseContext : DbContext
 {
-    private readonly Settings.AppSettings _appSettings;
+    private readonly DatabaseSettings _databaseSettings;
 
-    public DatabaseContext(IOptions<Settings.AppSettings> appSettings)
+    public DatabaseContext(IOptions<DatabaseSettings> databaseSettings)
     {
-        _appSettings = appSettings.Value;
+        _databaseSettings = databaseSettings.Value;
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseMongoDB(_appSettings.NicePartUsageDB, "NicePartUsageDB");
+        Console.WriteLine("database settings: " + _databaseSettings.ConnectionString + " " + _databaseSettings.DatabaseName);
+        optionsBuilder.UseMongoDB(_databaseSettings.ConnectionString, _databaseSettings.DatabaseName);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

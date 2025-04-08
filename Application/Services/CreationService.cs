@@ -22,6 +22,7 @@ public class CreationService : ICreationService
         ValidationResult validationResult = _creationValidator.Validate(creation);
         if (validationResult.IsValid)
         {
+            Console.WriteLine("yuhuuu");
             try
             {
                 var createdCreation = await _creationRepository.CreateCreation(creation);

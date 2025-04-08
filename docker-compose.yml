@@ -1,0 +1,30 @@
+version: '3.8'
+
+services: 
+  nicepartusagedb: 
+    image: 'mongo:latest'
+    container_name: nicepartusagedb_mongo
+    restart: always
+    ports: 
+      - '27017:27017'
+    volumes:
+      - nicepartusagedb_data:/data/db
+    networks:
+      - nicepartusage_network
+  
+  nicepartusageapi: 
+    image: nicepartusageapi
+    build:
+      context: .
+      dockerfile: ./NicePartUsage_API/Dockerfile
+    ports:
+      - '9090:8080'
+    depends_on:
+      - nicepartusagedb
+    networks:
+      - nicepartusage_network
+volumes:
+  nicepartusagedb_data:
+  
+networks:
+  nicepartusage_network:

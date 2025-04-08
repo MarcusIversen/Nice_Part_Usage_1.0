@@ -1,9 +1,12 @@
-using Application.Repositories;
 using Application.Services;
+using Application.UseCases.Creation;
+using Application.UseCases.Score;
+using Application.UseCases.User;
 using Core.Interfaces.Repositories;
 using Core.Interfaces.Services;
 using Core.Validation;
-
+using Infrastructure.MongoDB;
+using Infrastructure.Repositories;
 
 namespace NicePartUsage_API.Configs;
 
@@ -11,6 +14,12 @@ public static class DependencyInjectionConfig
 {
     public static void ConfigureDependencyInjection(this IServiceCollection services, WebApplicationBuilder builder)
     {
+        //DB 
+        services.AddDbContext<DatabaseContext>();
+        
+        // Automapper
+        services.AddSingleton(AutoMapperConfig.ConfigureAutoMapper());
+        
         // Repositories
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<ICreationRepository, CreationRepository>();
@@ -22,11 +31,23 @@ public static class DependencyInjectionConfig
         services.AddScoped<IScoreService, ScoreService>();
         
         // Validators
-        services.AddScoped<UserValidator>(); // Register UserValidator
-        services.AddScoped<CreationValidator>(); // Register CreationValidator
-        services.AddScoped<ScoreValidator>(); // Register ScoreValidator
+        services.AddScoped<UserValidator>();
+        services.AddScoped<CreationValidator>(); 
+        services.AddScoped<ScoreValidator>();
 
-        // Automapper
-        services.AddSingleton(AutoMapperConfig.ConfigureAutoMapper());
+        // Use cases
+        services.AddScoped<AddUserUseCase>();
+        services.AddScoped<DeleteUserUseCase>();
+        services.AddScoped<GetUserByIdUseCase>();
+        
+        services.AddScoped<AddScoreUseCase>();
+        services.AddScoped<DeleteUserUseCase>();
+        services.AddScoped<GetScoresUseCase>();
+        
+        services.AddScoped<AddOrUpdateCreationUseCase>();
+        services.AddScoped<DeleteCreationUseCase>();
+        services.AddScoped<GetCreationByIdUseCase>();
+        services.AddScoped<GetCreationsUseCase>();
+        services.AddScoped<GetCreationsByElementNameUseCase>();
     }
 }

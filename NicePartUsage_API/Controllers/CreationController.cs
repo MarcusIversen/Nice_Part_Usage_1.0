@@ -39,6 +39,7 @@ public class CreationController : ControllerBase
     {
         try
         {
+            Console.WriteLine("hey");
             var mappedCreation = _mapper.Map<Creation>(dto);
             var createdCreation = await _addOrUpdateCreationUseCase.ExecuteAsync(mappedCreation);
             return StatusCode(201, createdCreation);
@@ -84,6 +85,7 @@ public class CreationController : ControllerBase
         try
         {
             var mappedCreation = _mapper.Map<Creation>(dto);
+            mappedCreation.CreatedAt = DateTime.UtcNow;
             return Ok(await _addOrUpdateCreationUseCase.ExecuteAsync(mappedCreation));
         }
         catch (Exception e)

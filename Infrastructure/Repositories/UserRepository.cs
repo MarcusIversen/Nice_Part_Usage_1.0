@@ -1,13 +1,23 @@
 using Core.Entities;
 using Core.Interfaces.Repositories;
+using Infrastructure.MongoDB;
 
-namespace Application.Repositories;
+namespace Infrastructure.Repositories;
 
 public class UserRepository : IUserRepository
 {
-    public Task<User> CreateUser(User user)
+    private readonly DatabaseContext _context;
+
+    public UserRepository(DatabaseContext context)
     {
-        throw new NotImplementedException();
+        _context = context;
+    }
+
+    public async Task<User> CreateUser(User user)
+    {
+        await _context.Users.AddAsync(user);
+        await _context.SaveChangesAsync();
+        return user;
     }
 
     public Task<User> GetUserById(string userId)

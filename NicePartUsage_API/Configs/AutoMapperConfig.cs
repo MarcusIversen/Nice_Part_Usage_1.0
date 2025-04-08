@@ -1,5 +1,6 @@
 using AutoMapper;
 using Core.Entities;
+using MongoDB.Bson;
 using NicePartUsage_API.Controllers.DTOs.Creation;
 using NicePartUsage_API.Controllers.DTOs.Score;
 using NicePartUsage_API.Controllers.DTOs.User;
@@ -13,15 +14,10 @@ public class AutoMapperConfig
         var mapperConfig = new MapperConfiguration(config =>
         {
             // DTO to Core Entity
-            // Creation
+            // Creation, User & Score
             config.CreateMap<AddCreationDto, Creation>();
             config.CreateMap<UpdateCreationDto, Creation>();
-            
-            // User
             config.CreateMap<AddUserDto, User>();
-            config.CreateMap<AddUserDto, User>();
-            
-            // Score
             config.CreateMap<AddScoreDto, Score>();
         });
 

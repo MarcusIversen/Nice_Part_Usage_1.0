@@ -1,7 +1,7 @@
 using Core.Entities;
 using Core.Interfaces.Repositories;
 
-namespace Application.Repositories;
+namespace Infrastructure.Repositories;
 
 public class ScoreRepository : IScoreRepository
 {
